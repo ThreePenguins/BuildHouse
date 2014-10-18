@@ -43,9 +43,10 @@ var GameControlLayer = cc.Layer.extend({
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
 
-        cc.log(pos);
+        //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
-        var block = event.getCurrentTarget().block_fectory.addRetBlock(new_pos);
+        var randomIndex=Math.floor(Math.random()*5);
+        var block = event.getCurrentTarget().block_factory.randomShap(randomIndex,new_pos);
         event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
 

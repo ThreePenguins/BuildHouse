@@ -18,7 +18,7 @@ var Block = cc.Class.extend({
     randomShap:function(index,pos){
     	var randomArray=['addRetBlock','addCirBlock','addPoly3Block','addPoly3Block','addRectangle'];
     	var shapMethod=randomArray[index];
-    	eval("this."+shapMethod+"(pos)");
+    	return eval("this."+shapMethod+"(pos)");
     },
     
     addRetBlock:function (pos) {
