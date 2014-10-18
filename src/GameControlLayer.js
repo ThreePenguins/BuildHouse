@@ -1,11 +1,14 @@
 
 var GameControlLayer = cc.Layer.extend({
-    blockArr:[],
-    block_factory:null,
+    block_arr:[],
+    block_fectory:null,
+    eyeY:null,
 
-    ctor:function (space) {
+ctor:function (space) {
         this._super();
         this.space = space;
+        this.block_arr = [];
+        this.eyeY = 0;
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
@@ -27,7 +30,7 @@ var GameControlLayer = cc.Layer.extend({
             onTouchEnded: this.onTouchEnded
         }, this);
 
-        this.scheduleUpdate();
+        this.schedule(this.update, 0.1);
     },
 
     onExit:function() {
@@ -39,9 +42,11 @@ var GameControlLayer = cc.Layer.extend({
 
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
+
         cc.log(pos);
-        var randomIndex=Math.floor(Math.random()*5);
-        event.getCurrentTarget().block_factory.randomShap(randomIndex,pos);
+        var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
+        var block = event.getCurrentTarget().block_fectory.addRetBlock(new_pos);
+        event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
 
         if (pos.y > 450)
@@ -53,13 +58,13 @@ var GameControlLayer = cc.Layer.extend({
 
     onTouchMoved:function(touch, event) {
         var pos = touch.getLocation();
-        cc.log(pos);
+        //cc.log(pos);
         event.getCurrentTarget().recognizer.movePoint(pos.x, pos.y);
     },
 
     onTouchEnded:function(touch, event) {
         var rtn = event.getCurrentTarget().recognizer.endPoint();
-        cc.log("rnt = " + rtn);
+        //cc.log("rnt = " + rtn);
         switch (rtn) {
             case "up":
 //                event.getCurrentTarget().jump();
@@ -73,12 +78,36 @@ var GameControlLayer = cc.Layer.extend({
        // return this.sprite.getPositionX() - g_runnerStartX;
         return cc.p(0,0);
     },
+    getHighestBody:function(){
+        var max_pos = cp.vzero;
+        if(this.block_arr.length < 2){
+           return max_pos;
+        }
+
+        max_pos = this.block_arr[0].body.p;
+
+        for(var i = 1; i < this.block_arr.length-1; i++){
+          if(this.block_arr[i].body.p.y > this.block_arr[i-1].body.p.y){
+              max_pos = this.block_arr[i].body.p;
+          }
+        }
+        this.confirmEyePos(max_pos);
+        return max_pos;
+    },
+
+    confirmEyePos:function(pos){
+        this.eyeY = pos.y - 240 > 0 ? pos.y - 240 : 0;
+    },
+
+    getEyeY:function(){
+        return this.eyeY;
+    },
 
     update:function (dt) {
 
         // update status
 
-
+        this.getHighestBody();
         // check and update runner stat
 
     }

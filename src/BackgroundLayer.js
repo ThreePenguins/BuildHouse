@@ -5,7 +5,8 @@ var BackgroundLayer = cc.Layer.extend({
         this._super();
 
         this.space = space;
-
+        this.winsize = cc.director.getWinSize();
+        this.bk_index = 0;//back ground 重复引用计数
         this.init();
     },
 
@@ -25,18 +26,26 @@ var BackgroundLayer = cc.Layer.extend({
         wall_sprit.anchorX = 0;
         wall_sprit.anchorY = 1;
         this.addChild(wall_sprit);
-        //this.scheduleUpdate();
+        this.scheduleUpdate();
     },
 
-    checkAndReload:function (eyeX) {
+    checkAndReload:function (pos) {
+        if(pos.y > this.winsize.height*this.bk_index){
+            this.bk_index++;
 
+            var spriteBG = new cc.Sprite(res.PlayBG2_png);
+            spriteBG.setPosition(cc.p(0,this.bk_index*this.winsize.height));
+            spriteBG.anchorX = 0;
+            spriteBG.anchorY = 0;
+            this.addChild(spriteBG);
+        }
         return true;
     },
 
     update:function (dt) {
-        var animationLayer = this.getParent().getChildByTag(TagOfLayer.GameControl);
-        var eyeX = animationLayer.getEyeX();
-        this.checkAndReload(eyeX);
+        var game_control = this.getParent().getChildByTag(TagOfLayer.GameControl);
+        var max_high_pos = game_control.getHighestBody();
+        this.checkAndReload(max_high_pos);
 
     }
 });

@@ -15,8 +15,6 @@ var GameScene = cc.Scene.extend({
 
         wallBottom.u = 5;
         this.space.addStaticShape(wallBottom);
-
-
 //
     },
 
@@ -34,13 +32,18 @@ var GameScene = cc.Scene.extend({
         this.addChild(new StatusLayer(), 0, TagOfLayer.Status);
 
         this.scheduleUpdate();
+        //this.schedule(this.update, 0.5);
 
     },
     update:function (dt) {
         // chipmunk step
         this.space.step(dt);
 
+        var game_control = this.gameLayer.getChildByTag(TagOfLayer.GameControl);
+        //var max_high_pos = game_control.getHighestBody();
         //这里可以做试图变换
-        this.gameLayer.setPosition(cc.p(0,0));
+        //cc.log(-1*game_control.eyeY);
+        this.gameLayer.setPosition(cc.p(0,-1*game_control.eyeY));
+        //this.gameLayer.setPosition(cc.p(0,0));
     }
 });
