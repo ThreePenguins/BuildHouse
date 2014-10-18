@@ -1,10 +1,10 @@
 
 var GameControlLayer = cc.Layer.extend({
     block_arr:[],
-    block_fectory:null,
+    block_factory:null,
     eyeY:null,
 
-ctor:function (space) {
+    ctor:function (space) {
         this._super();
         this.space = space;
         this.block_arr = [];
