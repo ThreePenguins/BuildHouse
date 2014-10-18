@@ -34,6 +34,8 @@ var Block = cc.Class.extend({
         this.space.addShape(block_shape);
         block_sprit.setBody(body);
         this.layer.addChild(block_sprit);
+
+        return block_sprit;
     },
 
     addCirBlock:function (pos) {
@@ -56,11 +58,13 @@ var Block = cc.Class.extend({
 
         cir_block_sprite.setBody(body);
         this.layer.addChild(cir_block_sprite);
+
+        return cir_block_sprite;
     },
 
     addPoly3Block:function(pos){
-        var cir_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
-        var contentSize = cir_block_sprite.getContentSize();
+        var poly3_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
+        var contentSize = poly3_block_sprite.getContentSize();
         // init physics
         var radius = contentSize.width / 2;
         var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
@@ -73,14 +77,14 @@ var Block = cc.Class.extend({
         //this.shape.setCollisionType(SpriteTag.coin);
         //Sensors only call collision callbacks, and never generate real collisions
         //this.shape.setSensor(true);
-        cir_block_shape.u = this.u;
+        poly3_block_sprite.u = this.u;
         this.space.addShape(cir_block_shape);
 
-        cir_block_sprite.setBody(body);
-        this.layer.addChild(cir_block_sprite);
+        poly3_block_sprite.setBody(body);
+        this.layer.addChild(poly3_block_sprite);
+
+        return poly3_block_sprite;
     },
 
-    getShape:function () {
-        return this.shape;
-    }
+
 });
