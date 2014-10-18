@@ -45,7 +45,9 @@ var GameControlLayer = cc.Layer.extend({
 
         //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
-        var randomIndex=Math.floor(Math.random()*5);
+        var randomIndex=Math.floor(Math.random()*4);
+        cc.log(pos);
+        cc.log(new_pos);
         var block = event.getCurrentTarget().block_factory.randomShap(randomIndex,new_pos);
         event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);

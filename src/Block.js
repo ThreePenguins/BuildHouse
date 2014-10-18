@@ -16,17 +16,27 @@ var Block = cc.Class.extend({
     },
 
     randomShap:function(index,pos){
-    	var randomArray=['addRetBlock','addCirBlock','addPoly3Block','addPoly3Block','addRectangle'];
+    	var randomArray=['addRetBlock','addCirBlock','addPoly3Block','addRectangle'];
     	var shapMethod=randomArray[index];
-    	return eval("this."+shapMethod+"(pos)");
+    	switch (shapMethod){
+    	case 'addRetBlock':
+    		return this.addRetBlock(pos);
+    		break;
+    	case 'addCirBlock':
+    		return this.addCirBlock(pos);
+    		break;
+    	case 'addPoly3Block':
+    		return this.addPoly3Block(pos);
+    		break;
+    	case 'addRectangle':
+    		return this.addRectangle(pos);   
+    		break;
+    	}
     },
     
     addRetBlock:function (pos) {
-        cc.log(res.box_png);
-        cc.log(res.wall_png);
         var block_sprit = new cc.PhysicsSprite(res.box_png);
         var contentSize = block_sprit.getContentSize();
-        cc.log(contentSize);
         var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
         body.p = (pos);
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
@@ -63,7 +73,6 @@ var Block = cc.Class.extend({
     },
 
     addCirBlock:function (pos) {
-        cc.log(res.cir_png);
         var cir_block_sprite = new cc.PhysicsSprite.create(res.cir_png);
         var contentSize = cir_block_sprite.getContentSize();
         // init physics
