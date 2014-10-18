@@ -43,6 +43,24 @@ var Block = cc.Class.extend({
 
         return block_sprit;
     },
+    addRectangle:function(pos){
+    	var rectangle_sprite=new cc.PhysicsSprite(res.rectangle_png);
+    	var contentSize=rectangle_sprite.getContentSize();
+    	// init physics
+    	var body=new cp.Body(1, cp.momentForBox(1,contentSize.width,contentSize.height));
+    	body.p=pos;
+    	body.applyImpulse(cp.v(0,0),cp.v(0,0));
+    	this.space.addBody(body);
+
+    	var rectangle_shape=new cp.BoxShape(body,contentSize.width,contentSize.height);
+    	rectangle_shape.u=this.u;
+    	this.space.addShape(rectangle_shape);
+
+    	rectangle_sprite.setBody(body);
+    	this.layer.addChild(rectangle_sprite);
+
+    	return rectangle_sprite;
+    },
 
     addCirBlock:function (pos) {
         cc.log(res.cir_png);
