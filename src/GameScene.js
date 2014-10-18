@@ -13,7 +13,7 @@ var GameScene = cc.Scene.extend({
             cp.v(250, g_groundHight),// MAX INT:4294967295
             0);// thickness of wall
 
-        wallBottom.u = 1;
+        wallBottom.u = 5;
         this.space.addStaticShape(wallBottom);
 //
     },

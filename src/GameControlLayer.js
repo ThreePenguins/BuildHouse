@@ -12,13 +12,13 @@ ctor:function (space) {
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
-        this._debugNode.setVisible(true);
+        this._debugNode.setVisible(false);
         // Parallax ratio and offset
         this.addChild(this._debugNode, 100);
     },
     init:function () {
         this._super();
-        this.block_fectory = new Block(this, this.space);
+        this.block_factory = new Block(this, this.space);
         //initialize the recognizer
         this.recognizer = new SimpleRecognizer();
         // create sprite sheet
@@ -30,7 +30,7 @@ ctor:function (space) {
             onTouchEnded: this.onTouchEnded
         }, this);
 
-        this.schedule(this.update, 0.5);
+        this.schedule(this.update, 0.1);
     },
 
     onExit:function() {

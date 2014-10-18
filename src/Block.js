@@ -11,10 +11,16 @@ var Block = cc.Class.extend({
     ctor:function (layer, space) {
         this.space = space;
         this.layer = layer;
-        this.u = 0.5;
+        this.u = 3;
 
     },
 
+    randomShap:function(index,pos){
+    	var randomArray=['addRetBlock','addCirBlock','addPoly3Block','addPoly3Block','addRectangle'];
+    	var shapMethod=randomArray[index];
+    	eval("this."+shapMethod+"(pos)");
+    },
+    
     addRetBlock:function (pos) {
         cc.log(res.box_png);
         cc.log(res.wall_png);
@@ -66,7 +72,6 @@ var Block = cc.Class.extend({
         var poly3_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
         var contentSize = poly3_block_sprite.getContentSize();
         // init physics
-        var radius = contentSize.width / 2;
         var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
         body.p = pos;
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
