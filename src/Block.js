@@ -11,10 +11,16 @@ var Block = cc.Class.extend({
     ctor:function (layer, space) {
         this.space = space;
         this.layer = layer;
-        this.u = 0.5;
+        this.u = 3;
 
     },
 
+    randomShap:function(index,pos){
+    	var randomArray=['addRetBlock','addCirBlock','addPoly3Block','addPoly3Block','addRectangle'];
+    	var shapMethod=randomArray[index];
+    	eval("this."+shapMethod+"(pos)");
+    },
+    
     addRetBlock:function (pos) {
         cc.log(res.box_png);
         cc.log(res.wall_png);
@@ -62,7 +68,6 @@ var Block = cc.Class.extend({
         var cir_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
         var contentSize = cir_block_sprite.getContentSize();
         // init physics
-        var radius = contentSize.width / 2;
         var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
         body.p = pos;
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
@@ -78,6 +83,24 @@ var Block = cc.Class.extend({
 
         cir_block_sprite.setBody(body);
         this.layer.addChild(cir_block_sprite);
+    },
+    
+    addRectangle:function(pos){
+    	var cir_block_sprite=new cc.PhysicsSprite.create(res.rectangle_png);
+    	var contentSize=cir_block_sprite.getContentSize();
+    	// init physics
+    	var body=new cp.Body(1, cp.momentForBox(1,contentSize.width,contentSize.height));
+    	body.p=pos;
+    	body.applyImpulse(cp.v(0,0),cp.v(0,0));
+    	this.space.addBody(body);
+    	
+    	var verts=[-75,-25,-75,25,75,25,75,-25];
+    	var cir_block_shape=new cp.PolyShape(body,verts,cp.vzero);
+    	cir_block_shape.u=this.u;
+    	this.space.addShape(cir_block_shape);
+    	
+    	cir_block_sprite.setBody(body);
+    	this.layer.addChild(cir_block_sprite);
     },
 
     getShape:function () {
