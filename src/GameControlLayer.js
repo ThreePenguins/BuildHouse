@@ -1,6 +1,7 @@
 
 var GameControlLayer = cc.Layer.extend({
     blockArr:[],
+    block_fectory:null,
 
     ctor:function (space) {
         this._super();
@@ -14,7 +15,7 @@ var GameControlLayer = cc.Layer.extend({
     },
     init:function () {
         this._super();
-
+        this.block_fectory = new Block(this, this.space);
         //initialize the recognizer
         this.recognizer = new SimpleRecognizer();
         // create sprite sheet
@@ -39,9 +40,10 @@ var GameControlLayer = cc.Layer.extend({
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
         cc.log(pos);
+        event.getCurrentTarget().block_fectory.addBlock(pos);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
 
-        if (pos.y > 300)
+        if (pos.y > 450)
         {
             cc.director.runScene(new GameOverScene(100));
         }
