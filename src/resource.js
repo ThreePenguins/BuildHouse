@@ -3,7 +3,7 @@ var res = {
     start_n_png : "res/start_n.png",
     start_s_png : "res/start_s.png",
     PlayBG_png  : "res/PlayBG.png",
-    runner_png  : "res/running.png",
+    box_png  : "res/box.png",
     runner_plist : "res/running.plist",
     map_png : "res/map.png",
     map00_tmx : "res/map00.tmx",
@@ -12,7 +12,9 @@ var res = {
     background_plist : "res/background.plist",
     restart_n_png : "res/restart_n.png",
     restart_s_png : "res/restart_s.png",
-    wall_png : "res/wall.png"
+    wall_png : "res/wall.png",
+    cir_png : "res/cir.png",
+    poly3_png : "res/poly3.png",
 };
 
 var g_resources = [
@@ -21,7 +23,7 @@ var g_resources = [
     res.start_n_png,
     res.start_s_png,
     res.PlayBG_png,
-    res.runner_png,
+    res.box_png,
     res.runner_plist,
     res.map_png,
     res.map00_tmx,
@@ -30,5 +32,7 @@ var g_resources = [
     res.background_plist,
     res.restart_n_png,
     res.restart_s_png,
-    res.wall_png
+    res.wall_png,
+    res.cir_png,
+    res.poly3_png
 ];
