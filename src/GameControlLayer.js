@@ -9,9 +9,9 @@ var GameControlLayer = cc.Layer.extend({
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
-        this._debugNode.setVisible(false);
+        this._debugNode.setVisible(true);
         // Parallax ratio and offset
-        this.addChild(this._debugNode, 10);
+        this.addChild(this._debugNode, 100);
     },
     init:function () {
         this._super();
@@ -40,7 +40,7 @@ var GameControlLayer = cc.Layer.extend({
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
         cc.log(pos);
-        event.getCurrentTarget().block_fectory.addBlock(pos);
+        event.getCurrentTarget().block_fectory.addPoly3Block(pos);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
 
         if (pos.y > 450)

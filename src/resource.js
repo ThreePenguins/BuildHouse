@@ -12,7 +12,9 @@ var res = {
     background_plist : "res/background.plist",
     restart_n_png : "res/restart_n.png",
     restart_s_png : "res/restart_s.png",
-    wall_png : "res/wall.png"
+    wall_png : "res/wall.png",
+    cir_png : "res/cir.png",
+    poly3_png : "res/poly3.png",
 };
 
 var g_resources = [
@@ -30,5 +32,7 @@ var g_resources = [
     res.background_plist,
     res.restart_n_png,
     res.restart_s_png,
-    res.wall_png
+    res.wall_png,
+    res.cir_png,
+    res.poly3_png
 ];
