@@ -1,7 +1,7 @@
 
 var GameControlLayer = cc.Layer.extend({
     blockArr:[],
-    block_fectory:null,
+    block_factory:null,
 
     ctor:function (space) {
         this._super();
@@ -9,13 +9,13 @@ var GameControlLayer = cc.Layer.extend({
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
-        this._debugNode.setVisible(true);
+        this._debugNode.setVisible(false);
         // Parallax ratio and offset
         this.addChild(this._debugNode, 100);
     },
     init:function () {
         this._super();
-        this.block_fectory = new Block(this, this.space);
+        this.block_factory = new Block(this, this.space);
         //initialize the recognizer
         this.recognizer = new SimpleRecognizer();
         // create sprite sheet
@@ -40,7 +40,8 @@ var GameControlLayer = cc.Layer.extend({
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
         cc.log(pos);
-        event.getCurrentTarget().block_fectory.addPoly3Block(pos);
+        var randomIndex=Math.floor(Math.random()*5);
+        event.getCurrentTarget().block_factory.randomShap(randomIndex,pos);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
 
         if (pos.y > 450)

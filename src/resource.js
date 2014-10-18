@@ -15,6 +15,7 @@ var res = {
     wall_png : "res/wall.png",
     cir_png : "res/cir.png",
     poly3_png : "res/poly3.png",
+    rectangle_png:"res/Rectangle.png",
 };
 
 var g_resources = [
@@ -34,5 +35,6 @@ var g_resources = [
     res.restart_s_png,
     res.wall_png,
     res.cir_png,
-    res.poly3_png
+    res.poly3_png,
+    res.rectangle_png,
 ];
