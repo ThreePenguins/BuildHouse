@@ -12,7 +12,7 @@ var GameControlLayer = cc.Layer.extend({
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
-        this._debugNode.setVisible(false);
+        this._debugNode.setVisible(true);
         // Parallax ratio and offset
         this.addChild(this._debugNode, 100);
     },

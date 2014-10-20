@@ -11,7 +11,7 @@ var Block = cc.Class.extend({
     ctor:function (layer, space) {
         this.space = space;
         this.layer = layer;
-        this.u = 3;
+        this.u = 1.5;
 
     },
 
@@ -43,11 +43,12 @@ var Block = cc.Class.extend({
         this.space.addBody(body);
 
 
-        var block_shape = new cp.BoxShape(body,
+        var shape = new cp.BoxShape(body,
             contentSize.width,
             contentSize.height);
-        block_shape.u = this.u ;
-        this.space.addShape(block_shape);
+        shape.setFriction(this.u);
+
+        this.space.addShape(shape);
         block_sprit.setBody(body);
         this.layer.addChild(block_sprit);
 
@@ -62,9 +63,9 @@ var Block = cc.Class.extend({
     	body.applyImpulse(cp.v(0,0),cp.v(0,0));
     	this.space.addBody(body);
 
-    	var rectangle_shape=new cp.BoxShape(body,contentSize.width,contentSize.height);
-    	rectangle_shape.u=this.u;
-    	this.space.addShape(rectangle_shape);
+    	var shape=new cp.BoxShape(body,contentSize.width,contentSize.height);
+        shape.setFriction(this.u);
+    	this.space.addShape(shape);
 
     	rectangle_sprite.setBody(body);
     	this.layer.addChild(rectangle_sprite);
@@ -82,12 +83,12 @@ var Block = cc.Class.extend({
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
 
-        var cir_block_shape = new cp.CircleShape(body, radius, cp.vzero);
+        var shape = new cp.CircleShape(body, radius, cp.vzero);
         //this.shape.setCollisionType(SpriteTag.coin);
         //Sensors only call collision callbacks, and never generate real collisions
         //this.shape.setSensor(true);
-        cir_block_shape.u = this.u;
-        this.space.addShape(cir_block_shape);
+        shape.setFriction(this.u);
+        this.space.addShape(shape);
 
         cir_block_sprite.setBody(body);
         this.layer.addChild(cir_block_sprite);
@@ -105,12 +106,12 @@ var Block = cc.Class.extend({
         this.space.addBody(body);
 
         var verts = [-50, -25, 0,25, 50,-25];
-        var cir_block_shape = new cp.PolyShape(body, verts, cp.vzero);
+        var shape = new cp.PolyShape(body, verts, cp.vzero);
         //this.shape.setCollisionType(SpriteTag.coin);
         //Sensors only call collision callbacks, and never generate real collisions
         //this.shape.setSensor(true);
-        poly3_block_sprite.u = this.u;
-        this.space.addShape(cir_block_shape);
+        shape.setFriction(this.u);
+        this.space.addShape(shape);
 
         poly3_block_sprite.setBody(body);
         this.layer.addChild(poly3_block_sprite);
