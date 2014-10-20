@@ -42,7 +42,7 @@ var StatusLayer = cc.Layer.extend({
                 sprite = new cc.Sprite(res.poly3_png);
                 break;
             case 'addRectangle':
-                sprite = new cc.Sprite(res.res.rectangle_png);
+                sprite = new cc.Sprite(res.rectangle_png);
                 break;
 
         }
