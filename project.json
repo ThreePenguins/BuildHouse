@@ -21,6 +21,7 @@
         "src/coin.js",
         "src/Block.js",
         "src/GameOverScene.js",
-        "src/SimpleRecognizer.js"
+        "src/SimpleRecognizer.js",
+        "src/BlockIndex.js"
     ]
 }

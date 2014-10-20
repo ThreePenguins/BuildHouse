@@ -19,6 +19,7 @@ var GameControlLayer = cc.Layer.extend({
     init:function () {
         this._super();
         this.block_factory = new Block(this, this.space);
+        this.block_index = new BlockIndex();
         //initialize the recognizer
         this.recognizer = new SimpleRecognizer();
         // create sprite sheet
@@ -45,13 +46,12 @@ var GameControlLayer = cc.Layer.extend({
 
         //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
-        var randomIndex=Math.floor(Math.random()*4);
-        cc.log(pos);
-        cc.log(new_pos);
-        var block = event.getCurrentTarget().block_factory.randomShap(randomIndex,new_pos);
+
+        var block = event.getCurrentTarget().block_factory.randomShap(event.getCurrentTarget().block_index.next(),new_pos);
         event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
-
+        var state_layer = event.getCurrentTarget().getParent().getParent().getChildByTag(TagOfLayer.Status);
+        state_layer.updateNextList(event.getCurrentTarget().block_index.nextList());
         if (pos.y > 450)
         {
             cc.director.runScene(new GameOverScene(100));
