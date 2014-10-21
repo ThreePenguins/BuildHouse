@@ -46,16 +46,17 @@ var GameControlLayer = cc.Layer.extend({
 
         //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
-
+        if(pos.y < 330)
+            return;
         var block = event.getCurrentTarget().block_factory.randomShap(event.getCurrentTarget().block_index.next(),new_pos);
         event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
         var state_layer = event.getCurrentTarget().getParent().getParent().getChildByTag(TagOfLayer.Status);
         state_layer.updateNextList(event.getCurrentTarget().block_index.nextList());
-        if (pos.y > 450)
-        {
-            cc.director.runScene(new GameOverScene(100));
-        }
+//        if (pos.y > 450)
+//        {
+//            cc.director.runScene(new GameOverScene(100));
+//        }
         return true;
     },
 
@@ -90,7 +91,7 @@ var GameControlLayer = cc.Layer.extend({
         max_pos = this.block_arr[0].body.p;
 
         for(var i = 1; i < this.block_arr.length-1; i++){
-          if(this.block_arr[i].body.p.y > this.block_arr[i-1].body.p.y){
+          if(this.block_arr[i].body.p.y > max_pos.y){
               max_pos = this.block_arr[i].body.p;
           }
         }

@@ -16,6 +16,10 @@ var StatusLayer = cc.Layer.extend({
         this.labelMeter = new cc.LabelTTF("100M", "Helvetica", 20);
         this.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 20));
         this.addChild(this.labelMeter);
+
+        var line = new cc.Sprite(res.line_png);
+        line.setPosition(cp.v(winsize.width / 2,winsize.height - 150));
+        this.addChild(line);
     },
     updateNextList:function(next_list){
         this.clearNextList();
