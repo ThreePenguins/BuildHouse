@@ -3,12 +3,16 @@ var GameControlLayer = cc.Layer.extend({
     block_arr:[],
     block_factory:null,
     eyeY:null,
+    max_pos:null,
+    serial_count:0,
 
     ctor:function (space) {
         this._super();
         this.space = space;
         this.block_arr = [];
         this.eyeY = 0;
+        this.max_pos = cp.v(0,0);
+        this.serial_count = 0;//最大连续释放
         this.init();
 
         this._debugNode = new cc.PhysicsDebugNode(this.space);
@@ -32,7 +36,6 @@ var GameControlLayer = cc.Layer.extend({
         }, this);
 
         this.schedule(this.update, 0.1);
-       
     },
 
     onExit:function() {
@@ -44,6 +47,15 @@ var GameControlLayer = cc.Layer.extend({
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();
 
+        if(event.getCurrentTarget().isStable() ){
+            event.getCurrentTarget().serial_count = 0;
+        }
+        event.getCurrentTarget().serial_count += 1;
+
+        if(event.getCurrentTarget().serial_count > g_max_serial){
+            // 超过连续放置上限则不能放置新的block
+            return;
+        }
         //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
 
@@ -52,10 +64,7 @@ var GameControlLayer = cc.Layer.extend({
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);
         var state_layer = event.getCurrentTarget().getParent().getParent().getChildByTag(TagOfLayer.Status);
         state_layer.updateNextList(event.getCurrentTarget().block_index.nextList());
-        if (pos.y > 450)
-        {
-            cc.director.runScene(new GameOverScene(100));
-        }
+
         return true;
     },
 
@@ -77,10 +86,15 @@ var GameControlLayer = cc.Layer.extend({
         }
     },
 
-    getEyeX:function () {
-       // return this.sprite.getPositionX() - g_runnerStartX;
-        return cc.p(0,0);
+    isStable:function(){
+        for(var i = 1; i < this.block_arr.length; i++){
+            if (this.block_arr[i].body.isSleeping() != true)
+            return false;
+        }
+
+        return true;
     },
+
     getHighestBody:function(){
         var max_pos = cp.vzero;
         if(this.block_arr.length < 2){
@@ -89,12 +103,14 @@ var GameControlLayer = cc.Layer.extend({
 
         max_pos = this.block_arr[0].body.p;
 
-        for(var i = 1; i < this.block_arr.length-1; i++){
+        for(var i = 1; i < this.block_arr.length; i++){
           if(this.block_arr[i].body.p.y > this.block_arr[i-1].body.p.y){
               max_pos = this.block_arr[i].body.p;
           }
+
         }
         this.confirmEyePos(max_pos);
+        this.max_pos = max_pos;
         return max_pos;
     },
 
@@ -106,12 +122,51 @@ var GameControlLayer = cc.Layer.extend({
         return this.eyeY;
     },
 
+    isOver:function(){
+
+        for(var i = 0; i < this.block_arr.length; i++){
+            //cc.log(i);
+            //cc.log(this.block_arr[i].body.p.y);
+            if(this.block_arr[i].body.p.y < g_dead_line){
+                //cc.log("game over");
+                var status = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+                cc.director.runScene(new GameOverScene(status.score));
+            }
+        }
+        return false;
+
+    },
+
+    getScore:function(){
+        var score = 0;
+        var scale = 1;
+
+        for(var i = 0; i < this.block_arr.length; i++){
+            if(i == 20){
+                scale += 0.5;
+            }
+            if(i == 50){
+                scale += 0.5
+            }
+            score += this.block_arr[i].score*scale;
+        }
+
+        return score;
+    },
+
     update:function (dt) {
 
         // update status
 
-        this.getHighestBody();
+
+        this.isOver();
         // check and update runner stat
+
+        if(this.isStable()){
+            this.getHighestBody();
+            var status = this.getParent().getParent().getChildByTag(TagOfLayer.Status);
+            status.updateHighMeter(this.getScore());
+        }
 
     }
 

@@ -1,6 +1,12 @@
 
 var GameScene = cc.Scene.extend({
     space:null,
+    eye_y:null,
+
+    ctor:function () {
+        this._super();
+        this.eye_y = 0;
+    },
 
     // init space of chipmunk
     initPhysics:function() {
@@ -47,14 +53,28 @@ var GameScene = cc.Scene.extend({
         this.gameLayer = new cc.Layer();
 
         //add three layer in the right order
-        this.gameLayer.addChild(new BackgroundLayer(this.space), 0, TagOfLayer.background);
-        this.gameLayer.addChild(new GameControlLayer(this.space), 0, TagOfLayer.GameControl);
-        this.addChild(this.gameLayer);
-        this.addChild(new StatusLayer(), 0, TagOfLayer.Status);
+        var background_layer = new BackgroundLayer(this.space);
+        var game_contr_layer = new GameControlLayer(this.space);
+        var status_layer = new StatusLayer();
 
+        this.gameLayer.addChild(background_layer, 0, TagOfLayer.background);
+        this.gameLayer.addChild(game_contr_layer, 0, TagOfLayer.GameControl);
+        this.addChild(this.gameLayer, 0, TagOfLayer.GameLayer);
+
+        this.addChild(status_layer, 0, TagOfLayer.Status);
+
+        status_layer.updateNextList(game_contr_layer.block_index.nextList());
         this.scheduleUpdate();
         //this.schedule(this.update, 0.5);
 
+    },
+    collisionNewWallBegin:function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        shapes[0].setCollisionType(SpriteTag.oldblock);
+    },
+    collisionNewOldBegin:function (arbiter, space) {
+        var shapes = arbiter.getShapes();
+        shapes[0].setCollisionType(SpriteTag.oldblock);
     },
     update:function (dt) {
         // chipmunk step
@@ -64,7 +84,12 @@ var GameScene = cc.Scene.extend({
         //var max_high_pos = game_control.getHighestBody();
         //这里可以做试图变换
         //cc.log(-1*game_control.eyeY);
-        this.gameLayer.setPosition(cc.p(0,-1*game_control.eyeY));
+        if(this.eye_y != game_control.eyeY){
+            this.eye_y = game_control.eyeY;
+            this.gameLayer.runAction(new cc.MoveTo(1, cc.p(0,-1*this.eye_y)));
+        }
+//                this.gameLayer.runAction(new cc.MoveTo(2, cc.p(0,-1*game_control.eyeY)));
+       // this.gameLayer.setPosition();
         //this.gameLayer.setPosition(cc.p(0,0));
     }
 });

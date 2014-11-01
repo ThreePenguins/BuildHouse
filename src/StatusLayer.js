@@ -1,6 +1,7 @@
 var StatusLayer = cc.Layer.extend({
     next_blocks:[],
     high:0,
+    score:0,
 
     ctor:function () {
         this._super();
@@ -10,10 +11,12 @@ var StatusLayer = cc.Layer.extend({
     init:function () {
         this._super();
         this.next_blocks=[];
+        this.core = 0;
 
         var winsize = cc.director.getWinSize();
 
-        this.labelMeter = new cc.LabelTTF("100M", "Helvetica", 20);
+        this.labelMeter = new cc.LabelTTF("得分：0", "Helvetica", 20);
+        this.labelMeter.setFontFillColor(cc.color(100,100,100,255));
         this.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 20));
         this.addChild(this.labelMeter);
     },
@@ -55,8 +58,13 @@ var StatusLayer = cc.Layer.extend({
         this.next_blocks = [];
     },
 
-    updateHighMeter:function (py) {
-        this.labelMeter.setString(parseInt(py / 10) + "M");
+    updateHighMeter:function (score) {
+
+        if(this.core < score){
+            this.labelMeter.setString("得分："+parseInt(score));
+            this.score = score;
+        }
+
     }
 
 });

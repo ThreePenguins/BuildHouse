@@ -44,7 +44,7 @@ var BackgroundLayer = cc.Layer.extend({
 
     update:function (dt) {
         var game_control = this.getParent().getChildByTag(TagOfLayer.GameControl);
-        var max_high_pos = game_control.getHighestBody();
+        var max_high_pos = game_control.max_pos;
         this.checkAndReload(max_high_pos);
 
     }

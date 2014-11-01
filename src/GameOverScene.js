@@ -12,7 +12,9 @@ var GameOverLayer = cc.LayerColor.extend({
         this._super(cc.color(0, 0, 0, 180));
         var winSize = cc.director.getWinSize();
 
-        this.labelMeter = new cc.LabelTTF(this.high+"M", "Helvetica", 20);
+
+
+        this.labelMeter = new cc.LabelTTF("最终得分: "+this.high, "Helvetica", 20);
         this.labelMeter.setPosition(cc.p(winSize.width/2, winSize.height / 2 + 100));
         this.addChild(this.labelMeter);
 
@@ -28,7 +30,7 @@ var GameOverLayer = cc.LayerColor.extend({
     },
     onRestart:function (sender) {
         cc.director.resume();
-        cc.director.runScene(new MenuScene());
+        cc.director.runScene(new GameScene());
     }
 });
 
