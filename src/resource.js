@@ -5,16 +5,21 @@ var res = {
     PlayBG_png  : "res/PlayBG.png",
     PlayBG2_png  : "res/PlayBG2.png",
     box_png  : "res/box.png",
-    map_png : "res/map.png",
-    background_png :"res/background.png",
     restart_n_png : "res/restart_n.png",
     restart_s_png : "res/restart_s.png",
     wall_png : "res/wall.png",
     cir_png : "res/cir.png",
     poly3_png : "res/poly3.png",
     rectangle_png:"res/Rectangle.png",
+    //MUSIC
+    mainMainMusic_mp3 : 'res/Music/mainMainMusic.mp3',
+    mainMainMusic_ogg : 'res/Music/mainMainMusic.ogg',
+    explodeEffect_mp3 : 'res/Music/explodeEffect.mp3',
+    explodeEffect_ogg : 'res/Music/explodeEffect.ogg',
 };
-
+var rmb={
+	_loadingImage:"res/RMB/loadingImage.jpg",	
+};
 var g_resources = [
     //image
     res.helloBG_png,
@@ -23,12 +28,17 @@ var g_resources = [
     res.PlayBG_png,
     res.PlayBG2_png,
     res.box_png,
-    res.map_png,
-    res.background_png,
     res.restart_n_png,
     res.restart_s_png,
     res.wall_png,
     res.cir_png,
     res.poly3_png,
     res.rectangle_png,
+    //LOADING
+    rmb._loadingImage,
+    //MUSIC
+    res.mainMainMusic_mp3,
+    res.explodeEffect_mp3,
+    res.mainMainMusic_ogg,
+    res.explodeEffect_ogg,
 ];

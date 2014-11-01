@@ -32,6 +32,7 @@ var GameControlLayer = cc.Layer.extend({
         }, this);
 
         this.schedule(this.update, 0.1);
+       
     },
 
     onExit:function() {
@@ -39,7 +40,6 @@ var GameControlLayer = cc.Layer.extend({
 
         this._super();
     },
-
 
     onTouchBegan:function(touch, event) {
         var pos = touch.getLocation();

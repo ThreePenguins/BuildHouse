@@ -28,7 +28,7 @@ var GameOverLayer = cc.LayerColor.extend({
     },
     onRestart:function (sender) {
         cc.director.resume();
-        cc.director.runScene(new GameScene());
+        cc.director.runScene(new MenuScene());
     }
 });
 

@@ -25,11 +25,21 @@ var GameScene = cc.Scene.extend({
             0);// thickness of wall
 
         wallBottom.setFriction(1);
+        wallBottom.setCollisionType(SpriteTag.wall);
         this.space.addStaticShape(wallBottom);
+        // setup chipmunk CollisionHandler
+        this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionNewOldBegin.bind(this.space), null,
+        		null, null);
 //
     },
 
 
+    collisionNewOldBegin:function ( space) {
+    	if(MW.EFSOUND){
+    		cc.audioEngine.playEffect(res.explodeEffect_mp3);
+    	}
+    	return true;
+    },
     onEnter:function () {
         this._super();
         this.initPhysics();

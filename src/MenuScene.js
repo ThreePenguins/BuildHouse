@@ -33,6 +33,12 @@ var MenuLayer = cc.Layer.extend({
         var menu = new cc.Menu(menuItemPlay);  //7. create the menu
         menu.setPosition(centerpos);
         this.addChild(menu);
+        
+        if (MW.BGSOUND) {
+        	cc.audioEngine.setMusicVolume(0.7);
+        	cc.audioEngine.playMusic(res.mainMainMusic_mp3, true);
+        }
+        return true;
     },
 
     onPlay : function(){
