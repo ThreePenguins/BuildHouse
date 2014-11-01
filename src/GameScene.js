@@ -64,17 +64,20 @@ var GameScene = cc.Scene.extend({
         this.addChild(status_layer, 0, TagOfLayer.Status);
 
         status_layer.updateNextList(game_contr_layer.block_index.nextList());
-        this.scheduleUpdate();
+
         //this.schedule(this.update, 0.5);
+        this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionNewOldBegin.bind(this.space), null,
+            null, null);
+
+        this.scheduleUpdate();
+
 
     },
-    collisionNewWallBegin:function (arbiter, space) {
-        var shapes = arbiter.getShapes();
-        shapes[0].setCollisionType(SpriteTag.oldblock);
-    },
-    collisionNewOldBegin:function (arbiter, space) {
-        var shapes = arbiter.getShapes();
-        shapes[0].setCollisionType(SpriteTag.oldblock);
+    collisionNewOldBegin:function ( space) {
+        if(MW.EFSOUND){
+            cc.audioEngine.playEffect(res.explodeEffect_mp3);
+        }
+        return true;
     },
     update:function (dt) {
         // chipmunk step
