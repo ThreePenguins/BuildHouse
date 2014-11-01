@@ -31,7 +31,7 @@ var GameScene = cc.Scene.extend({
             0);// thickness of wall
 
         wallBottom.setFriction(1);
-        wallBottom.setCollisionType(SpriteTag.wall);
+        wallBottom.setCollisionType(SpriteTag.newblock);
         this.space.addStaticShape(wallBottom);
         // setup chipmunk CollisionHandler
         this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionNewOldBegin.bind(this.space), null,
