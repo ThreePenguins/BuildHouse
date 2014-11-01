@@ -30,15 +30,47 @@ var MenuLayer = cc.Layer.extend({
     		new cc.Sprite(res.start_n_png), // normal state image
     		new cc.Sprite(res.start_s_png), //select state image
             this.onPlay, this);
-        var menu = new cc.Menu(menuItemPlay);  //7. create the menu
-        menu.setPosition(centerpos);
-        this.addChild(menu);
+//        var menu = new cc.Menu(menuItemPlay);  //7. create the menu
+//        menu.setPosition(centerpos);
+//        this.addChild(menu);
         
         if (MW.BGSOUND) {
         	cc.audioEngine.setMusicVolume(0.7);
         	cc.audioEngine.playMusic(res.mainMainMusic_mp3, true);
         }
+        
+        cc.MenuItemFont.setFontName("Arial");
+        cc.MenuItemFont.setFontSize(16);
+        var title1 = new cc.MenuItemFont("Sound");
+        title1.setEnabled(false);
+        title1.setPosition(200,0);
+        
+        cc.MenuItemFont.setFontName("Arial");
+        cc.MenuItemFont.setFontSize(16);
+        var item1 = new cc.MenuItemToggle(
+        		new cc.MenuItemFont("On"),
+        		new cc.MenuItemFont("Off") );
+        item1.setCallback(this.onSoundControl );
+        var state = MW.BGSOUND ? 0 : 1;
+        item1.setSelectedIndex(state);
+        item1.setPosition(260,0);
+        
+        var menu = new cc.Menu(menuItemPlay,title1,item1);  //7. create the menu
+        menu.setPosition(centerpos);
+        menu.alignItemsInColumns(1, 2);
+        this.addChild(menu);
         return true;
+    },
+    onSoundControl:function(){
+    	MW.BGSOUND = !MW.BGSOUND;
+    	var audioEngine = cc.audioEngine;
+    	if(MW.BGSOUND){
+    		audioEngine.playMusic(res.mainMainMusic_mp3, true);
+    	}
+    	else{
+    		audioEngine.stopMusic();
+    		audioEngine.stopAllEffects();
+    	}
     },
 
     onPlay : function(){

@@ -20,7 +20,7 @@ var GameScene = cc.Scene.extend({
         //如果进行了过多的迭代,虽然物理影响效果会更好,但是这也会消耗过多的cpu处理时间.
         //如果进行的迭代太少,物理模拟效果会不精确,或者使本该静止的物体没能静止下来.
         //使用迭代器的个数在于平衡CPU性能和物理模拟精确度之间权衡.
-        this.space.iterations = 60;
+        this.space.iterations = 10;
         // 休眠临界时间
         this.space.sleepTimeThreshold = 0.5;
         this.space.collisionSlop = 0.5;
@@ -33,19 +33,7 @@ var GameScene = cc.Scene.extend({
         wallBottom.setFriction(1);
         wallBottom.setCollisionType(SpriteTag.newblock);
         this.space.addStaticShape(wallBottom);
-        // setup chipmunk CollisionHandler
-        this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionNewOldBegin.bind(this.space), null,
-        		null, null);
-//
-    },
-
-
-    collisionNewOldBegin:function ( space) {
-    	if(MW.EFSOUND){
-    		cc.audioEngine.playEffect(res.explodeEffect_mp3);
-    	}
-    	return true;
-    },
+    },    
     onEnter:function () {
         this._super();
         this.initPhysics();
@@ -74,10 +62,10 @@ var GameScene = cc.Scene.extend({
 
     },
     collisionNewOldBegin:function ( space) {
-        if(MW.EFSOUND){
-            cc.audioEngine.playEffect(res.explodeEffect_mp3);
-        }
-        return true;
+    	if(MW.BGSOUND){
+    		cc.audioEngine.playEffect(res.explodeEffect_mp3);
+    	}
+    	return true;
     },
     update:function (dt) {
         // chipmunk step
