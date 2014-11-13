@@ -27,6 +27,15 @@ var GameOverLayer = cc.LayerColor.extend({
         var menu = new cc.Menu(menuItemRestart);
         menu.setPosition(centerPos);
         this.addChild(menu);
+
+        if (WeixinApi.openInWeixin()) {
+            this.addChild(new WxShareLayer());
+        }
+        else{
+            var shareLayer = new ShareLayer("haha,分享了吧","www.xxrmb.com", "http://www.xxrmb.com/buildhouse/res/helloBG.png");
+            this.addChild(shareLayer,1000);
+        }
+
     },
     onRestart:function (sender) {
         cc.director.resume();

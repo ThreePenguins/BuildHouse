@@ -24,6 +24,10 @@
         "src/GameOverScene.js",
         "src/SimpleRecognizer.js",
         "src/BlockIndex.js",
-        "src/RMBLoaderScene.js"
+        "src/RMBLoaderScene.js",
+        "src/ShareLayer.js",
+        "src/WxShareLayer.js",
+        "src/WeixinApi.js"
+
     ]
 }
