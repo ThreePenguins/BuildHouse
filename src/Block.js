@@ -37,7 +37,7 @@ var Block = cc.Class.extend({
     addRetBlock:function (pos) {
         var block_sprit = new cc.PhysicsSprite(res.box_png);
         var contentSize = block_sprit.getContentSize();
-        var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
+        var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
         body.p = (pos);
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
@@ -61,7 +61,7 @@ var Block = cc.Class.extend({
     	var rectangle_sprite=new cc.PhysicsSprite(res.rectangle_png);
     	var contentSize=rectangle_sprite.getContentSize();
     	// init physics
-    	var body=new cp.Body(1, cp.momentForBox(1,contentSize.width,contentSize.height));
+    	var body=new cp.Body(1.5, cp.momentForBox(1.5,contentSize.width,contentSize.height));
     	body.p=pos;
     	body.applyImpulse(cp.v(0,0),cp.v(0,0));
     	this.space.addBody(body);
@@ -84,16 +84,13 @@ var Block = cc.Class.extend({
         var contentSize = cir_block_sprite.getContentSize();
         // init physics
         var radius = contentSize.width / 2;
-        var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
+        var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
         body.p = pos;
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
 
         var shape = new cp.CircleShape(body, radius, cp.vzero);
         shape.setCollisionType(SpriteTag.newblock);
-        //this.shape.setCollisionType(SpriteTag.coin);
-        //Sensors only call collision callbacks, and never generate real collisions
-        //this.shape.setSensor(true);
         shape.setFriction(this.u);
         this.space.addShape(shape);
 
@@ -109,7 +106,7 @@ var Block = cc.Class.extend({
         var poly3_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
         var contentSize = poly3_block_sprite.getContentSize();
         // init physics
-        var body = new cp.Body(1, cp.momentForBox(1, contentSize.width, contentSize.height));
+        var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
         body.p = pos;
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
@@ -117,9 +114,6 @@ var Block = cc.Class.extend({
         var verts = [-50, -25, 0,25, 50,-25];
         var shape = new cp.PolyShape(body, verts, cp.vzero);
         shape.setCollisionType(SpriteTag.newblock);
-        //this.shape.setCollisionType(SpriteTag.coin);
-        //Sensors only call collision callbacks, and never generate real collisions
-        //this.shape.setSensor(true);
         shape.setFriction(this.u);
         this.space.addShape(shape);
 

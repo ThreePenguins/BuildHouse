@@ -5,6 +5,7 @@ var GameControlLayer = cc.Layer.extend({
     eyeY:null,
     max_pos:null,
     serial_count:0,
+    space:null,
 
     ctor:function (space) {
         this._super();
@@ -58,7 +59,9 @@ var GameControlLayer = cc.Layer.extend({
         }
         //cc.log(pos);
         var new_pos = event.getCurrentTarget().convertToNodeSpace(pos);
-
+        //投放位置不可在最高层以下
+        if(new_pos.y<(event.getCurrentTarget().max_pos.y+50))
+        	return;
         var block = event.getCurrentTarget().block_factory.randomShap(event.getCurrentTarget().block_index.next(),new_pos);
         event.getCurrentTarget().block_arr.push(block);
         event.getCurrentTarget().recognizer.beginPoint(pos.x, pos.y);

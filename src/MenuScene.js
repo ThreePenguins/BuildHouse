@@ -34,10 +34,10 @@ var MenuLayer = cc.Layer.extend({
 //        menu.setPosition(centerpos);
 //        this.addChild(menu);
         
-        if (MW.BGSOUND) {
-        	cc.audioEngine.setMusicVolume(0.7);
-        	cc.audioEngine.playMusic(res.mainMainMusic_mp3, true);
-        }
+//        if (MW.BGSOUND) {
+//        	cc.audioEngine.setMusicVolume(0.7);
+//        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
+//        }
         
         cc.MenuItemFont.setFontName("Arial");
         cc.MenuItemFont.setFontSize(16);
@@ -64,13 +64,13 @@ var MenuLayer = cc.Layer.extend({
     onSoundControl:function(){
     	MW.BGSOUND = !MW.BGSOUND;
     	var audioEngine = cc.audioEngine;
-    	if(MW.BGSOUND){
-    		audioEngine.playMusic(res.mainMainMusic_mp3, true);
-    	}
-    	else{
-    		audioEngine.stopMusic();
-    		audioEngine.stopAllEffects();
-    	}
+//    	if(MW.BGSOUND){
+//    		audioEngine.playMusic(res.mainMusic_mp3, true);
+//    	}
+//    	else{
+//    		audioEngine.stopMusic();
+//    		audioEngine.stopAllEffects();
+//    	}
     },
 
     onPlay : function(){
