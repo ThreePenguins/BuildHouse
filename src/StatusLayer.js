@@ -17,7 +17,7 @@ var StatusLayer = cc.Layer.extend({
 
         this.labelMeter = new cc.LabelTTF("得分：0", "Helvetica", 20);
         this.labelMeter.setFontFillColor(cc.color(100,100,100,255));
-        this.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 20));
+        this.labelMeter.setPosition(cc.p(winsize.width - 70, winsize.height - 30));
         this.addChild(this.labelMeter);
     },
     updateNextList:function(next_list){

@@ -5,10 +5,10 @@ var WxShareLayer = cc.Layer.extend({
     arrow:null,
     lable:null,
     is_on:null,
-    ctor: function () {
+    ctor: function (pic_s,pic_n,pos_x,pos_y) {
         this._super();
         this.initWxApi();
-        this.initShareButton(res.qqmb_png,res.qqmb_png,this.onShare,cc.p(80,150));
+        this.initShareButton(pic_s,pic_n,this.onShare,cc.p(pos_x,pos_y));
         cc.log(WeixinApi.openInWeixin());
 
     },
@@ -24,16 +24,15 @@ var WxShareLayer = cc.Layer.extend({
     },
     onShare: function () {
         this.addChild(new MaskLayer());
-        //this.addChild(new MaskLayer());
     },
     initWxApi:function(){
         var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?46b0a8d26d37172ca6c1c800d87116c8";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
+//        (function() {
+//            var hm = document.createElement("script");
+//            hm.src = "//hm.baidu.com/hm.js?46b0a8d26d37172ca6c1c800d87116c8";
+//            var s = document.getElementsByTagName("script")[0];
+//            s.parentNode.insertBefore(hm, s);
+//        })();
 
         var href = window.location.href, base = href,
             lastpt = href.lastIndexOf("."),
@@ -44,8 +43,8 @@ var WxShareLayer = cc.Layer.extend({
             "appId": "", // 服务号可以填写appId
             "imgUrl":base+'/icon.png',
             "link":window.location.href,
-            "desc":"最近微信刷屏的游戏，喵的太贱了，快来感受下吧",
-            "title":"最近微信刷屏的游戏，喵的太贱了，快来感受下吧"
+            "desc":"快来感受下吧",
+            "title":"快来感受下吧"
         };
         window.wxFriend = wxData;/*{
          "appId": "", // 服务号可以填写appId
@@ -55,7 +54,6 @@ var WxShareLayer = cc.Layer.extend({
          "title":"最近微信刷屏的游戏《来自喵星的你》，喵的太贱了，快来感受下吧"
          };*/
         WeixinApi.ready(function(Api) {
-            Api.hideOptionMenu();
             var wxCallbacks = {
                 ready : function() {
                 },
@@ -78,7 +76,7 @@ var WxShareLayer = cc.Layer.extend({
 var MaskLayer = cc.LayerColor.extend({
     a:null,
     ctor: function () {
-        this._super(cc.color(100, 0, 0, 188), cc.winSize.width, cc.winSize.height);
+        this._super(cc.color(0, 0, 0, 188), cc.winSize.width, cc.winSize.height);
         var arrow = new cc.Sprite(res.arrow_png);
         arrow.anchorX = 1;
         arrow.anchorY = 1;

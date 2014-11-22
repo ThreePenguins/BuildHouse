@@ -28,8 +28,8 @@ var GameScene = cc.Scene.extend({
         space.collisionSlop = 0.5;
         // set up Walls
         var wallBottom = new cp.SegmentShape(staticBody,
-            cp.v(50, g_groundHight),// start point
-            cp.v(250, g_groundHight),// MAX INT:4294967295
+            cp.v(30, g_groundHight),// start point
+            cp.v(295, g_groundHight),// MAX INT:4294967295
             0);// thickness of wall
 
         wallBottom.setFriction(1);
@@ -56,10 +56,6 @@ var GameScene = cc.Scene.extend({
 
         status_layer.updateNextList(game_contr_layer.block_index.nextList());
     
-        if (MW.BGSOUND) {
-        	cc.audioEngine.setMusicVolume(0.7);
-        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
-        }
         this.scheduleUpdate();
         this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionBegin.bind(this), this.collisionPre.bind(this),this.collisionPost.bind(this), this.collisionSeparate.bind(this));
 
@@ -70,9 +66,7 @@ var GameScene = cc.Scene.extend({
     	this._super();
     },
     collisionBegin:function ( arbiter, space ) {
-    	if(MW.BGSOUND){
-    		cc.audioEngine.playEffect(res.explodeEffect_mp3);
-    	}
+    	cc.audioEngine.playEffect(res.explodeEffect_mp3);
     	return true;
     },
 
