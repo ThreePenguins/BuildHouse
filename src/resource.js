@@ -11,16 +11,20 @@ var res = {
     cir_png : "res/cir.png",
     poly3_png : "res/poly3.png",
     rectangle_png:"res/Rectangle.png",
-    //music
-//    mainMusic_mp3:"res/Music/mainMusic.mp3",
-    explodeEffect_mp3:"res/Music/explodeEffect.mp3",
-//    explodeEffect_mp3 : 'res/Music/explodeEffect.mp3',
-//    explodeEffect_ogg : 'res/Music/explodeEffect.ogg',
-//    mainMainMusic_mp3 : 'res/Music/mainMainMusic.mp3',
-//    mainMainMusic_ogg : 'res/Music/mainMainMusic.ogg',
+    //MUSIC
+    mainMusic_mp3 : 'res/Music/mainMusic.mp3',
+    //mainMainMusic_ogg : 'res/Music/mainMainMusic.ogg',
+    explodeEffect_mp3 : 'res/Music/explodeEffect.mp3',
+    //explodeEffect_ogg : 'res/Music/explodeEffect.ogg',
+    //share
+    qqmb_png : 'res/Share/qqmb.png',
+    sinamb_png : 'res/Share/sinamb.png',
+    qzone_png : 'res/Share/qzone.png',
+    arrow_png : "res/Share/arrow.png",
+
 };
 var rmb={
-	_loadingImage:"res/RMB/loadingImage.jpg",	
+    _loadingImage:"res/RMB/loadingImage.jpg",
 };
 var g_resources = [
     //image
@@ -38,11 +42,14 @@ var g_resources = [
     res.rectangle_png,
     //LOADING
     rmb._loadingImage,
-    //music
-//    res.mainMusic_mp3,
+    //MUSIC
+    res.mainMusic_mp3,
     res.explodeEffect_mp3,
-//    res.mainMainMusic_mp3,
-//    res.mainMainMusic_ogg,
-//    res.explodeEffect_mp3,
-//    res.explodeEffect_ogg,
+    //res.mainMainMusic_ogg,
+    //res.explodeEffect_ogg,
+    //share
+    res.qqmb_png,
+    res.sinamb_png,
+    res.qzone_png,
+    res.arrow_png
 ];

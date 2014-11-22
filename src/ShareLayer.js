@@ -38,7 +38,7 @@ var ShareLayer = cc.Layer.extend({
     //分享到新浪微博
     shareToSina:function() {
         cc.log("shareToSina");
-        var sharesinastring='http://v.t.sina.com.cn/share/share.php?title='+this.content+'&url='+url+'&this.content=utf-8&sourceUrl='+this.url+'&pic='+this.pic_url;
+        var sharesinastring='http://v.t.sina.com.cn/share/share.php?title='+this.content+'&url='+this.url+'&this.content=utf-8&sourceUrl='+this.url+'&pic='+this.pic_url;
         window.open(sharesinastring,'newwindow','height=400,width=400,top=100,left=100');
     },
     //分享到QQ空间

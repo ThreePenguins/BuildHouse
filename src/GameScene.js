@@ -55,12 +55,11 @@ var GameScene = cc.Scene.extend({
         this.addChild(status_layer, 0, TagOfLayer.Status);
 
         status_layer.updateNextList(game_contr_layer.block_index.nextList());
-
-        //this.schedule(this.update, 0.5);        
-//        if (MW.BGSOUND) {
-//        	cc.audioEngine.setMusicVolume(0.7);
-//        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
-//        }
+    
+        if (MW.BGSOUND) {
+        	cc.audioEngine.setMusicVolume(0.7);
+        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
+        }
         this.scheduleUpdate();
         this.space.addCollisionHandler(SpriteTag.newblock, SpriteTag.newblock, this.collisionBegin.bind(this), this.collisionPre.bind(this),this.collisionPost.bind(this), this.collisionSeparate.bind(this));
 

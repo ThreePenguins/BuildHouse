@@ -30,14 +30,11 @@ var MenuLayer = cc.Layer.extend({
     		new cc.Sprite(res.start_n_png), // normal state image
     		new cc.Sprite(res.start_s_png), //select state image
             this.onPlay, this);
-//        var menu = new cc.Menu(menuItemPlay);  //7. create the menu
-//        menu.setPosition(centerpos);
-//        this.addChild(menu);
         
-//        if (MW.BGSOUND) {
-//        	cc.audioEngine.setMusicVolume(0.7);
-//        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
-//        }
+        if (MW.BGSOUND) {
+        	cc.audioEngine.setMusicVolume(0.7);
+        	cc.audioEngine.playMusic(res.mainMusic_mp3, true);
+        }
         
         cc.MenuItemFont.setFontName("Arial");
         cc.MenuItemFont.setFontSize(16);
@@ -64,13 +61,13 @@ var MenuLayer = cc.Layer.extend({
     onSoundControl:function(){
     	MW.BGSOUND = !MW.BGSOUND;
     	var audioEngine = cc.audioEngine;
-//    	if(MW.BGSOUND){
-//    		audioEngine.playMusic(res.mainMusic_mp3, true);
-//    	}
-//    	else{
-//    		audioEngine.stopMusic();
-//    		audioEngine.stopAllEffects();
-//    	}
+    	if(MW.BGSOUND){
+    		audioEngine.playMusic(res.mainMusic_mp3, true);
+    	}
+    	else{
+    		audioEngine.stopMusic();
+    		audioEngine.stopAllEffects();
+    	}
     },
 
     onPlay : function(){
