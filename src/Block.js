@@ -104,6 +104,7 @@ var Block = cc.Class.extend({
 
     addPoly3Block:function(pos){
         var poly3_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
+        poly3_block_sprite.scale = 0.5;
         var contentSize = poly3_block_sprite.getContentSize();
         // init physics
         var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
@@ -111,7 +112,7 @@ var Block = cc.Class.extend({
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
 
-        var verts = [-50, -25, 0,25, 50,-25];
+        var verts = [-25, -12, 0,12, 25,-12];
         var shape = new cp.PolyShape(body, verts, cp.vzero);
         shape.setCollisionType(SpriteTag.newblock);
         shape.setFriction(this.u);

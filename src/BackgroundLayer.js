@@ -20,8 +20,29 @@ var BackgroundLayer = cc.Layer.extend({
         spriteBG.anchorX = 0;
         spriteBG.anchorY = 0;
         this.addChild(spriteBG);
-        
+        this.cloude(4, this.bk_index*this.winsize.height);
         this.scheduleUpdate();
+    },
+    rangeRandom:function (n,m){
+        var c = m-n+1;
+        return Math.floor(Math.random() * c + n);
+    },
+
+    cloude:function(num, base_y){
+        while(num--){
+            var cloud = new cc.Sprite(res.cloud_png);
+            cloud.scale = this.rangeRandom(3,7)*0.1;
+            cc.log(this.rangeRandom(0.2,0.5));
+            var move_to_y = base_y + this.rangeRandom(20,this.winsize.height);
+            if (move_to_y < 300)
+                return;
+            var move_to_x = this.rangeRandom(0,2)%2 * this.winsize.width; //0 或 320
+
+            cloud.setPosition(cc.p(this.rangeRandom(100,220),move_to_y));
+            cloud.runAction(new cc.MoveTo(this.rangeRandom(10,30), cc.p(move_to_x,move_to_y )));
+            this.addChild(cloud);
+        }
+
     },
 
     checkAndReload:function (pos) {
@@ -33,6 +54,8 @@ var BackgroundLayer = cc.Layer.extend({
             spriteBG.anchorX = 0;
             spriteBG.anchorY = 0;
             this.addChild(spriteBG);
+
+            this.cloude(4, this.bk_index*this.winsize.height);
         }
         return true;
     },

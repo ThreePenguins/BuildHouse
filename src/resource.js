@@ -18,6 +18,7 @@ var res = {
     qzone_png : 'res/Share/qzone.png',
     arrow_png : "res/Share/arrow.png",
     gameover_png:"res/gameover.png",
+    cloud_png:"res/cloud.png",
     explodeEffect_mp3 : 'res/Music/explodeEffect.mp3',
 };
 var rmb={
@@ -46,5 +47,6 @@ var g_resources = [
     res.share_s_png,
     res.share_n_png,
     res.gameover_png,
+    res.cloud_png,
     res.explodeEffect_mp3
 ];
