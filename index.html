@@ -10,12 +10,22 @@
     <meta name="x5-fullscreen" content="true"/>
     <meta name="360-fullscreen" content="true"/>
     <style>
-        body, canvas, div {
+        body, canvas,div {
             -moz-user-select: none;
             -webkit-user-select: none;
             -ms-user-select: none;
             -khtml-user-select: none;
             -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+        .game {
+        text-align: center;
+        left:0px;
+        right:0px;
+        bottom: 50px;
+        position: fixed;
+        top:0px;
+
+
         }
     </style>
     <style>
@@ -28,13 +38,33 @@
             background-color:#FFF;
             z-index:999;
         }
-        #ifr{height: 50px!important;}
+        #ifr{height: 50px;}
     </style>
+    <script src="http://static.adwo.com/jssdk/jssdk.min.js"></script>
+    <script type="text/javascript">
+        var test = new adwojs({
+            eid: 'spn',
+            aid: '3e9512871946419895274cb15649d5c8', //申请的android平台pid
+            pid: '688d4ede0a2445cc94877dcac3096a7f', //申请的iphone平台pid
+            bt: false, //是否开启测试广告，用于客户在申请PID过程中的广告测试,默认值为false
+            af: true, //是否自动适合ipad平板广告，默认值为true。
+            width: 320, //广告图片宽度(除320外，还有720宽度，用于ipad中显示)
+            height: 50  //广告图片高度(除50外，还有110高度，用于ipad中显示)
+        });
+        test.send();
+
+    </script>
 
 </head>
-<body style="padding:0; margin: 0; background: #000;">
-<canvas id="gameCanvas" width="0" height="0">
-</canvas>
+<body >
+
+<!--<div class=""><div id="spn"></div></div>-->
+<div class="ad_bottom"><div id="spn"></div></div>
+
+<div class = "game">
+    <canvas id="gameCanvas" width="0" height="0"></canvas>
+</div>
+
 
 <script src="./frameworks/cocos2d-html5/CCBoot.js"></script>
 <script src="main.js"></script>

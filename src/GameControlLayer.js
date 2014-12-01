@@ -154,7 +154,7 @@ var GameControlLayer = cc.Layer.extend({
             score += this.block_arr[i].score*scale;
         }
 
-        return score;
+        return score + Math.round(this.eyeY/4);
     },
 
     update:function (dt) {

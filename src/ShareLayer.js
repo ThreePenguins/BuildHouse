@@ -15,9 +15,9 @@ var ShareLayer = cc.Layer.extend({
         this.url = url;
         this.pic_url = pic_url;
 
-        this.initShareButton(res.qqmb_png,res.qqmb_png,this.shareToWb,cc.p(80,100));
-        this.initShareButton(res.qzone_png,res.qzone_png,this.hareToQzone,cc.p(160,100));
-        this.initShareButton(res.sinamb_png,res.sinamb_png,this.shareToSina,cc.p(240,100));
+        this.initShareButton(res.qqmb_png,res.qqmb_png,this.shareToWb,cc.p(80*2,100*2));
+        this.initShareButton(res.qzone_png,res.qzone_png,this.hareToQzone,cc.p(160*2,100*2));
+        this.initShareButton(res.sinamb_png,res.sinamb_png,this.shareToSina,cc.p(240*2,100*2));
 
     },
     initShareButton:function(pic_on, pic_down, fun, pos){

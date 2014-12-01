@@ -76,7 +76,7 @@ cc.RMBLoaderScene = cc.Scene.extend({
         texture2d.initWithElement(img);
         texture2d.handleLoadedTexture();
         var logo = self._logo = cc.Sprite.create(texture2d);
-        logo.setScale(cc.contentScaleFactor());
+        //logo.setScale(cc.contentScaleFactor());
         logo.x = centerPos.x;
         logo.y = centerPos.y;
         self._bgLayer.addChild(logo, 10);

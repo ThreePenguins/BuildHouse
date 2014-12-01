@@ -2,12 +2,20 @@ var res = {
     helloBG_png : "res/helloBG.png",
     start_n_png : "res/start_n.png",
     start_s_png : "res/start_s.png",
-    PlayBG_png  : "res/PlayBG.png",
+    PlayBG_png  : "res/PlayBG.jpg",
     PlayBG2_png  : "res/PlayBG2.jpg",
-    box_png  : "res/box.png",
+
+    box_png_b  : "res/box-b.png",
+    box_png_g  : "res/box-g.png",
+    box_png_r  : "res/box-r.png",
+    box_png_y  : "res/box-y.png",
+
     restart_n_png : "res/restart_n.png",
     restart_s_png : "res/restart_s.png",
-    cir_png : "res/cir.png",
+
+    cir_png_b : "res/cir-b.png",
+    cir_png_r : "res/cir-r.png",
+
     poly3_png : "res/poly3.png",
     rectangle_png:"res/Rectangle.png",
     //share
@@ -31,10 +39,14 @@ var g_resources = [
     res.start_s_png,
     res.PlayBG_png,
     res.PlayBG2_png,
-    res.box_png,
+    res.box_png_b,
+    res.box_png_g,
+    res.box_png_r,
+    res.box_png_y,
     res.restart_n_png,
     res.restart_s_png,
-    res.cir_png,
+    res.cir_png_b,
+    res.cir_png_r,
     res.poly3_png,
     res.rectangle_png,
     //LOADING

@@ -9,16 +9,16 @@ var MenuLayer = cc.Layer.extend({
     init:function(){
         //call super class's super function
         this._super();
-
+        //cc.screen.requestFullScreen(targetElement, onFullScreenCallback);
         //2. get the screen size of your game canvas
         var winsize = cc.director.getWinSize();
 
         //3. calculate the center point
-        var centerpos = cc.p(winsize.width / 2, winsize.height / 2);
+        var centerpos = cc.p(winsize.width / 2, winsize.height / 2 + 50);
 
         //4. create a background image and set it's position at the center of the screen
         var spritebg = new cc.Sprite(res.helloBG_png);
-        spritebg.scale = 0.5;
+        //spritebg.scale = 0.5;
         spritebg.setPosition(centerpos);
         this.addChild(spritebg);
 

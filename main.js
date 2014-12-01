@@ -1,7 +1,8 @@
 cc.game.onStart = function(){
-    cc.view.setDesignResolutionSize(320, 480, cc.ResolutionPolicy.SHOW_ALL);
+    cc.view.setDesignResolutionSize(640, 960, cc.ResolutionPolicy.FIXED_WIDTH);
 	cc.view.resizeWithBrowserSize(true);
     //load resources
+
 	cc.RMBLoaderScene.preload(g_resources, function () {
         cc.director.runScene(new MenuScene());
     }, this);

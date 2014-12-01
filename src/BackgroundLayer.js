@@ -12,15 +12,14 @@ var BackgroundLayer = cc.Layer.extend({
 
     init:function () {
         this._super();
-        var winsize = cc.director.getWinSize();
-        var centerPos = cc.p(winsize.width / 2, winsize.height / 2);
+
         var spriteBG = new cc.Sprite(res.PlayBG_png);
-        spriteBG.scale = 0.5;
+        //spriteBG.scale = 0.5;
         spriteBG.setPosition(cc.p(0,0));
         spriteBG.anchorX = 0;
         spriteBG.anchorY = 0;
         this.addChild(spriteBG);
-        this.cloude(4, this.bk_index*this.winsize.height);
+        this.cloude(4, this.bk_index*g_game_h);
         this.scheduleUpdate();
     },
     rangeRandom:function (n,m){
@@ -31,12 +30,12 @@ var BackgroundLayer = cc.Layer.extend({
     cloude:function(num, base_y){
         while(num--){
             var cloud = new cc.Sprite(res.cloud_png);
-            cloud.scale = this.rangeRandom(3,7)*0.1;
+            cloud.scale = this.rangeRandom(5,12)*0.1;
             cc.log(this.rangeRandom(0.2,0.5));
-            var move_to_y = base_y + this.rangeRandom(20,this.winsize.height);
-            if (move_to_y < 300)
+            var move_to_y = base_y + this.rangeRandom(20,g_game_h);
+            if (move_to_y < 600)
                 return;
-            var move_to_x = this.rangeRandom(0,2)%2 * this.winsize.width; //0 或 320
+            var move_to_x = this.rangeRandom(0,2)%2 * g_game_w; //0 或 320
 
             cloud.setPosition(cc.p(this.rangeRandom(100,220),move_to_y));
             cloud.runAction(new cc.MoveTo(this.rangeRandom(10,30), cc.p(move_to_x,move_to_y )));
@@ -46,16 +45,16 @@ var BackgroundLayer = cc.Layer.extend({
     },
 
     checkAndReload:function (pos) {
-        if(pos.y > this.winsize.height*this.bk_index){
+        if(pos.y >= g_game_h*this.bk_index){
             this.bk_index++;
 
             var spriteBG = new cc.Sprite(res.PlayBG2_png);
-            spriteBG.setPosition(cc.p(0,this.bk_index*this.winsize.height));
+            spriteBG.setPosition(cc.p(0,this.bk_index*g_game_h));
             spriteBG.anchorX = 0;
             spriteBG.anchorY = 0;
             this.addChild(spriteBG);
 
-            this.cloude(4, this.bk_index*this.winsize.height);
+            this.cloude(4, this.bk_index*g_game_h);
         }
         return true;
     },

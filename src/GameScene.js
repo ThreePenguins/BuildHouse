@@ -28,8 +28,8 @@ var GameScene = cc.Scene.extend({
         space.collisionSlop = 0.5;
         // set up Walls
         var wallBottom = new cp.SegmentShape(staticBody,
-            cp.v(30, g_groundHight),// start point
-            cp.v(295, g_groundHight),// MAX INT:4294967295
+            cp.v(60, g_groundHight),// start point
+            cp.v(590, g_groundHight),// MAX INT:4294967295
             0);// thickness of wall
 
         wallBottom.setFriction(1);

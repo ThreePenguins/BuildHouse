@@ -15,12 +15,12 @@ var GameOverLayer = cc.LayerColor.extend({
         var centerPos = cc.p(winSize.width / 2, winSize.height / 2);
         
         var spritebg = new cc.Sprite(res.gameover_png);
-        spritebg.scale = 0.5;
+        //spritebg.scale = 0.5;
         spritebg.setPosition(centerPos);
         this.addChild(spritebg);
         
-        this.labelMeter = new cc.LabelTTF(this.high, "Helvetica", 30);
-        this.labelMeter.setPosition(cc.p(winSize.width/2, winSize.height / 2 + 97));
+        this.labelMeter = new cc.LabelTTF(this.high, "Helvetica", 55);
+        this.labelMeter.setPosition(cc.p(winSize.width/2, winSize.height / 2 + 97*2));
         this.addChild(this.labelMeter);
         //计算击败用户百分比
         var hiscore = 620;
@@ -34,12 +34,12 @@ var GameOverLayer = cc.LayerColor.extend({
         else if(percent>=100){
         	percent=99;
         }
-        this.labelPercent = new cc.LabelTTF(percent,  'Times New Roman', 32, cc.size(320,32), cc.TEXT_ALIGNMENT_LEFT);
-        this.labelPercent.setFontFillColor(cc.color.RED);
-        this.labelPercent.setPosition(cc.p(winSize.width/2+163, winSize.height / 2 +59));
+        this.labelPercent = new cc.LabelTTF(percent,  'Helvetica', 45, cc.size(320,45), cc.TEXT_ALIGNMENT_LEFT);
+        this.labelPercent.setFontFillColor(cc.color(250,6,6,255));
+        this.labelPercent.setPosition(cc.p(winSize.width/2+170, winSize.height / 2 +114));
         this.addChild(this.labelPercent);
         
-        cc.MenuItemFont.setFontSize(30);
+        cc.MenuItemFont.setFontSize(60);
         var menuItemRestart = new cc.MenuItemSprite(
         	new cc.Sprite(res.restart_n_png),
         	new cc.Sprite(res.restart_s_png),
@@ -49,7 +49,7 @@ var GameOverLayer = cc.LayerColor.extend({
         this.addChild(menu);
         
         if (WeixinApi.openInWeixin()) { 
-        	this.addChild(new WxShareLayer(res.share_s_png,res.share_n_png,centerPos.x,centerPos.y-50)); 
+        	this.addChild(new WxShareLayer(res.share_s_png,res.share_n_png,centerPos.x,centerPos.y-120));
         }
         else{
             var shareLayer = new ShareLayer("haha,分享了吧","www.xxrmb.com", "http://www.xxrmb.com/buildhouse/res/helloBG.png");

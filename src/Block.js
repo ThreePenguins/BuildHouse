@@ -18,6 +18,7 @@ var Block = cc.Class.extend({
 
     randomShap:function(index,pos){
     	var shapMethod=g_randomArray[index];
+        g_block_index++;
     	switch (shapMethod){
     	case 'addRetBlock':
     		return this.addRetBlock(pos);
@@ -35,7 +36,8 @@ var Block = cc.Class.extend({
     },
     
     addRetBlock:function (pos) {
-        var block_sprit = new cc.PhysicsSprite(res.box_png);
+
+        var block_sprit = new cc.PhysicsSprite(g_box_arr[g_block_index%g_color_box_num]);
         var contentSize = block_sprit.getContentSize();
         var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
         body.p = (pos);
@@ -80,7 +82,7 @@ var Block = cc.Class.extend({
     },
 
     addCirBlock:function (pos) {
-        var cir_block_sprite = new cc.PhysicsSprite.create(res.cir_png);
+        var cir_block_sprite = new cc.PhysicsSprite.create(g_cir_arr[g_block_index%g_color_cir_num]);
         var contentSize = cir_block_sprite.getContentSize();
         // init physics
         var radius = contentSize.width / 2;
@@ -104,7 +106,7 @@ var Block = cc.Class.extend({
 
     addPoly3Block:function(pos){
         var poly3_block_sprite = new cc.PhysicsSprite.create(res.poly3_png);
-        poly3_block_sprite.scale = 0.5;
+        //poly3_block_sprite.scale = 0.5;
         var contentSize = poly3_block_sprite.getContentSize();
         // init physics
         var body = new cp.Body(1.5, cp.momentForBox(1.5, contentSize.width, contentSize.height));
@@ -112,7 +114,7 @@ var Block = cc.Class.extend({
         body.applyImpulse(cp.v(0, 0), cp.v(0, 0));
         this.space.addBody(body);
 
-        var verts = [-25, -12, 0,12, 25,-12];
+        var verts = [-44, -44, 0,44, 44,-44];
         var shape = new cp.PolyShape(body, verts, cp.vzero);
         shape.setCollisionType(SpriteTag.newblock);
         shape.setFriction(this.u);
